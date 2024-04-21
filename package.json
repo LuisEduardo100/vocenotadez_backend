@@ -1,0 +1,37 @@
+{
+  "name": "vocenotadez",
+  "version": "1.0.0",
+  "description": "Plataforma de ensino online",
+  "main": "index.js",
+  "scripts": {
+    "dev": "ts-node-dev --transpile-only --ignore-watch node_modules src/server.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LuisEduardo100/VoceNotaDez.git"
+  },
+  "author": "Luis Eduardo de Paula Albuquerque",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LuisEduardo100/VoceNotaDez/issues"
+  },
+  "homepage": "https://github.com/LuisEduardo100/VoceNotaDez#readme",
+  "dependencies": {
+    "@adminjs/express": "^6.1.0",
+    "@adminjs/sequelize": "^4.1.1",
+    "@adminjs/upload": "^4.0.2",
+    "adminjs": "^7.8.1",
+    "express": "^4.19.2",
+    "express-formidable": "^1.2.0",
+    "formidable": "^3.5.1",
+    "pg": "^8.11.5",
+    "sequelize": "^6.37.3"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.12.7",
+    "sequelize-cli": "^6.6.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.4.5"
+  }
+}
