@@ -6,12 +6,13 @@ import { fileURLToPath } from 'url'
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export const componentLoader = new ComponentLoader
+
 export const episodeResourceOptions: ResourceOptions = {
   navigation: 'Catálogo',
   editProperties: ['name', 'synopsis', 'courseId', 'order', 'uploadVideo', 'secondsLong'  ],
-  filterProperties: ['name', 'synopsis', 'courseId', 'secondsLong', 'createdAt', 'updatedAt'],
+  filterProperties: ['name', 'synopsis', 'courseId','uploadThumbnail', 'secondsLong', 'createdAt', 'updatedAt'],
   listProperties: ['id', 'name', 'courseId', 'order', 'secondsLong'],
-  showProperties: ['id', 'name', 'synopsis', 'courseId', 'order', 'videoUrl', 'secondsLong', 'createdAt', 'updatedAt']
+  showProperties: ['id', 'name', 'synopsis', 'courseId', 'order', 'thumbnailUrl', 'videoUrl', 'secondsLong', 'createdAt', 'updatedAt']
 }
 
 export const episodeResourceFeatures: FeatureType[] = [
