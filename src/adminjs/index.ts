@@ -1,16 +1,17 @@
-import AdminJS from 'adminjs'
+import AdminJS, { ComponentLoader } from 'adminjs'
 import AdminJsExpress from '@adminjs/express'
 import AdminJsSequelize from '@adminjs/sequelize'
 import {database} from '../database/index.js'
 import { adminJsResources } from './resources/index.js'
+import { componentLoader } from './resources/episode.js'
 
 
 
 AdminJS.registerAdapter(AdminJsSequelize)
-
 export const adminJs = new AdminJS({
     databases: [database],
     rootPath: '/admin',
+    componentLoader,
     resources: adminJsResources,
     branding: {
         companyName: 'VoceNotaDez',
@@ -36,3 +37,5 @@ export const adminJs = new AdminJS({
 })
 
 export const adminJsRouter = AdminJsExpress.buildRouter(adminJs)
+
+adminJs.watch()
