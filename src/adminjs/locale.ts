@@ -2,6 +2,8 @@ import { Locale } from 'adminjs'
 
 export const locale: Locale = {
   language: 'pt-BR',
+  availableLanguages: ['en', 'pt-BR'], 
+  localeDetection: true, 
   translations: {
     actions: {
       new: 'Criar novo(a)',

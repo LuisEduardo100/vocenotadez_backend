@@ -1,6 +1,7 @@
 import express from 'express'
 import {database} from './database/index.js'
 import { adminJs, adminJsRouter } from './adminjs/index.js'
+import { router } from './route.js'
 
 
 const app = express()
@@ -8,6 +9,7 @@ const PORT = process.env.PORT || 3000
 
 app.use(express.static('public'))
 
+app.use(router)
 app.use(adminJs.options.rootPath, adminJsRouter)
 
 app.listen(PORT, () =>{

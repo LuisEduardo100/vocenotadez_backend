@@ -6,6 +6,7 @@
     "esModuleInterop": false,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
+    "jsx": "react",
     "skipLibCheck": true,
     // "typeRoots": ["./node_modules/@types"],
     "moduleResolution": "NodeNext",

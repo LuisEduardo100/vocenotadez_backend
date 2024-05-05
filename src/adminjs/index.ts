@@ -5,14 +5,26 @@ import {database} from '../database/index.js'
 import { adminJsResources } from './resources/index.js'
 import { componentLoader } from './resources/episode.js'
 import bcrypt from 'bcrypt'
-import {User} from '../models/User.js'
+import { User } from '../models/User.js'
+import { locale } from './locale.js'
+import path from 'path'
+import { fileURLToPath } from "url";
+import { Course } from 'src/models/Course.js'
+import { Episode } from 'src/models/Episode.js'
+import { Category } from 'src/models/Category.js'
 
+const loader = new ComponentLoader()
+let absolute = path.resolve('./components/Dashboard.jsx')
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 AdminJS.registerAdapter(AdminJsSequelize)
+
 export const adminJs = new AdminJS({
     databases: [database],
     rootPath: '/admin',
     componentLoader,
+    locale: locale,
     resources: adminJsResources,
     branding: {
         companyName: 'VoceNotaDez',
