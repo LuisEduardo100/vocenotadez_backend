@@ -34,10 +34,10 @@ export const locale: Locale = {
       adminVersion: 'Admin: {{version}}',
       appVersion: 'App: {{version}}',
       loginWelcome: 'Bem-vindo',
-      courses: 'Cursos',
-      episodes: 'Episódios',
-      categories: 'Categorias',
-      users: 'Usuários'
+      Courses: 'Cursos',
+      Episodes: 'Episódios',
+      Categories: 'Categorias',
+      Users: 'Usuários'
     },
     properties: {
       firstName: 'Primeiro Nome',

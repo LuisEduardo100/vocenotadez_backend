@@ -1,5 +1,6 @@
 import { database } from '../database/index.js'
 import { DataTypes, Model, Optional } from 'sequelize'
+import { Course } from './Course.js'
 
 export interface Episode {
     id: number
@@ -45,7 +46,7 @@ export interface Episode {
     courseId: {
       allowNull: false,
       type: DataTypes.INTEGER,
-      references: { model: 'courses', key: 'id' },
+      references: { model: Course, key: 'id' },
       onUpdate: 'CASCADE',
       onDelete: 'RESTRICT'
     }

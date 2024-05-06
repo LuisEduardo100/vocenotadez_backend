@@ -1,5 +1,6 @@
 import { database } from '../database/index.js'
 import { DataTypes, Model, Optional } from 'sequelize'
+import { Category } from './Category.js'
 
 
 export interface Course {
@@ -40,7 +41,7 @@ export const Course = database.define<CourseInstance, Course>('Course', {
     categoryId: {
       allowNull: false,
       type: DataTypes.INTEGER,
-      references: { model: 'categories', key: 'id' },
+      references: { model: Category, key: 'id' },
       onUpdate: 'CASCADE',
       onDelete: 'RESTRICT'
     }

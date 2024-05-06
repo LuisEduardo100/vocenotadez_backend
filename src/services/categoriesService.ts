@@ -1,4 +1,5 @@
 import { Category } from "src/models/Category.js"
+import { Course } from "src/models/index.js"
 
 export const categoryService = {
     findAllPaginated: async (page: number, perPage: number) => {
@@ -10,12 +11,28 @@ export const categoryService = {
             limit: perPage,
             offset
         })
-        
+
         return {
             categories: rows,
             page,
             perPage,
             total: count
-          }
+        }
+    },
+    findByIdWithCourses: async (id: string) => {
+        const categoryWithCourses = await Category.findByPk(id, {
+            attributes: ['id', 'name'],
+            include: {
+                model: Course,
+                as: 'Courses',
+                attributes: [
+                    'id', 
+                    'name', 
+                    'synopsis', 
+                    ['thumbnail_url', 'thumbnailUrl']],
+            }
+        })
+
+        return categoryWithCourses
     }
 }
