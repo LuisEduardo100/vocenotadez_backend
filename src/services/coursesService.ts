@@ -1,5 +1,6 @@
 import { Episode } from 'src/models/Episode.js'
 import { Course } from '../models/Course.js'
+import { Op } from 'sequelize'
 
 export const coursesService = {
     findByIdWithEpisodes: async (id: string) => {
@@ -40,5 +41,26 @@ export const coursesService = {
         })
 
         return courses
-    }
+    },
+    findByName: async (name: string, page: number, perPage: number) => {
+        const offset = (page - 1) * perPage
+        const { count, rows } = await Course.findAndCountAll({
+            attributes: ['id', 'name', 'synopsis', ['thumbnail_url', 'thumbnailUrl']],
+            where: {
+                name: {
+                    // Recurso importado do Sequelize para utilizar operadores do SQL
+                    [Op.iLike]: `%${name}%` // % para procurar pelo termo em qualquer posição da String
+                }
+            },
+            limit: perPage,
+            offset
+        })
+        return {
+            courses: rows,
+            page,
+            perPage,
+            total: count
+        }
+    },
+
 }

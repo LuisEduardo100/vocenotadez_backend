@@ -1,4 +1,5 @@
 import { Response, Request } from 'express'
+import { getPaginationParams } from 'src/helpers/getPaginationParams.js'
 import { Course } from 'src/models/Course.js'
 import { coursesService } from 'src/services/coursesService.js'
 
@@ -29,10 +30,24 @@ export const coursesController = {
         try {
             const newCourses = await coursesService.getTopNewest()
             return res.send(newCourses)
-        } catch(err){
-            if (err instanceof Error){
-                res.status(400).json({message: err.message})
+        } catch (err) {
+            if (err instanceof Error) {
+                res.status(400).json({ message: err.message })
             }
         }
-    }
+    },
+    search: async (req: Request, res: Response) => {
+        const { name } = req.query
+        const [page, perPage] = getPaginationParams(req.query)
+        try {
+            // Nada que não for uma string não passará do if pois lançará um erro
+            if (typeof name != 'string') throw new Error('Parâmetro nome precisa ser uma string')
+            const courses = await coursesService.findByName(name, page, perPage)
+            return res.json(courses)
+        } catch (err) {
+            if (err instanceof Error) {
+                res.status(400).json({ message: err.message })
+            }
+        }
+    },
 }
