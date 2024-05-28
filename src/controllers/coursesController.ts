@@ -1,6 +1,5 @@
 import { Response, Request } from 'express'
 import { getPaginationParams } from 'src/helpers/getPaginationParams.js'
-import { Course } from 'src/models/Course.js'
 import { coursesService } from 'src/services/coursesService.js'
 
 export const coursesController = {
