@@ -1,6 +1,7 @@
 import { database } from '../database/index.js'
-import { CreationOptional, DataTypes, InferAttributes, InferCreationAttributes, Model, ModelAttributeColumnOptions, Optional } from 'sequelize'
+import { DataTypes,  Model, Optional } from 'sequelize'
 import bcrypt from 'bcrypt'
+import { EpisodeInstance } from './Episode.js'
 
 
 type CheckPasswordCallback = (err: Error | undefined, isSame: boolean) => void
@@ -19,7 +20,8 @@ export interface UserAttributes {
 export interface UserCreationAttributes extends Optional<UserAttributes, 'id'> {}
 
 export interface UserInstance extends Model<UserAttributes, UserCreationAttributes>, UserAttributes {
-  checkPassword: (password: string, callbackfn: CheckPasswordCallback) => void
+  checkPassword: (password: string, callbackfn: CheckPasswordCallback) => void,
+  Episodes?: EpisodeInstance[]
 }
 
 export const User = database.define<UserInstance, UserAttributes>('users', {
@@ -71,7 +73,9 @@ export const User = database.define<UserInstance, UserAttributes>('users', {
   }
 })
 
+//@ts-ignore
 User.prototype.checkPassword = function(password: string, callbackfn: CheckPasswordCallback) {
+  //@ts-ignore
   bcrypt.compare(password, this.password, (err, isSame) => {
     if (err) {
       callbackfn(err, false)

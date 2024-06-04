@@ -1,6 +1,7 @@
 import { database } from '../database/index.js'
 import { DataTypes, Model, Optional } from 'sequelize'
-import { Course } from './Course.js'
+import { Course, CourseInstance } from './Course.js'
+import { WatchTimeInstance } from './WatchTime.js'
 
 export interface Episode {
     id: number
@@ -16,7 +17,10 @@ export interface Episode {
     extends Optional<Episode, 'id' | 'videoUrl' | 'secondsLong' > {}
   
   export interface EpisodeInstance
-    extends Model<Episode, EpisodeCreationAttributes>, Episode {}
+    extends Model<Episode, EpisodeCreationAttributes>, Episode {
+      course?: CourseInstance
+      watchTime?: WatchTimeInstance
+    }
   
   export const Episode = database.define<EpisodeInstance, Episode>('Episode', {
     id: {

@@ -2,6 +2,7 @@ import { Response } from 'express'
 import fs from 'fs'
 import path from 'path'
 import { dirname } from 'path'
+import { WatchTime } from 'src/models/WatchTime.js'
 import { fileURLToPath } from 'url'
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -38,4 +39,37 @@ export const episodeService = {
       fs.createReadStream(filePath).pipe(res)
     }
   },
+  getWatchTime: async (userId: string | number, episodeId: string | number) => {
+    const watchTime = await WatchTime.findOne({
+      attributes: ['seconds'],
+      where: {
+        userId,
+        episodeId
+      }
+    })
+
+    return watchTime
+  },
+
+  setWatchTime: async (userId: number, episodeId: number, seconds: number) => {
+    const watchTimeAlreadyExists = await WatchTime.findOne({
+      where: {
+        userId,
+        episodeId
+      }
+    })
+
+    if (watchTimeAlreadyExists) {
+      watchTimeAlreadyExists.seconds = seconds
+      await watchTimeAlreadyExists.save()
+      return watchTimeAlreadyExists
+    } else {
+      const newWatchTime = await WatchTime.create({
+        userId,
+        episodeId,
+        seconds
+      })
+      return newWatchTime
+    }
+  }
 }
